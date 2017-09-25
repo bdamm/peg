@@ -171,7 +171,7 @@ TypeSpecifier
 
 StructOrUnionSpecifier
    <- StructOrUnion
-      ( Identifier? LWING StructDeclaration+ RWING
+      ( Identifier? LWING StructDeclaration* RWING
       / Identifier
       )
 
@@ -210,7 +210,7 @@ TypeQualifier
     / VOLATILE
     / DECLSPEC LPAR Identifier RPAR
 
-FunctionSpecifier <- INLINE / STDCALL
+FunctionSpecifier <- INLINE / INLINETWO / STDCALL
 
 Declarator <- Pointer? DirectDeclarator #{}
 
@@ -437,6 +437,7 @@ GOTO      <- 'goto'      !IdChar Spacing
 IF        <- 'if'        !IdChar Spacing
 INT       <- 'int'       !IdChar Spacing
 INLINE    <- 'inline'    !IdChar Spacing
+INLINETWO <- '__inline'  !IdChar Spacing
 LONG      <- 'long'      !IdChar Spacing
 REGISTER  <- 'register'  !IdChar Spacing
 RESTRICT  <- 'restrict'  !IdChar Spacing
@@ -478,6 +479,7 @@ Keyword
       / 'if'
       / 'int'
       / 'inline'
+      / '__inline'
       / 'long'
       / 'register'
       / 'restrict'
