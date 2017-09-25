@@ -389,6 +389,8 @@ AssignmentOperator
     / OREQU
 
 Expression <- AssignmentExpression (COMMA AssignmentExpression)*
+    / LPAR Expression RPAR
+
 
 ConstantExpression <- ConditionalExpression
 
