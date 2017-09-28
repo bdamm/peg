@@ -315,7 +315,7 @@ AssemblerTemplate
    <- StringLiteral
 
 OutputOperands
-   <- StringLiteral? WhiteSpace? Expression (COMMA StringLiteral? Expression)*
+   <- StringLiteral? Expression (COMMA StringLiteral? Expression)*
 
 InputOperands
    <- StringLiteral? Expression (COMMA StringLiteral? Expression)*
