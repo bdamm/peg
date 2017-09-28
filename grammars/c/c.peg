@@ -281,6 +281,7 @@ Statement
     / SelectionStatement
     / IterationStatement
     / JumpStatement
+    / AsmStatement
 
 LabeledStatement
    <- Identifier COLON Statement
@@ -307,6 +308,20 @@ JumpStatement
     / BREAK SEMI
     / RETURN Expression? SEMI
 
+AsmStatement
+   <- ASM VOLATILE? LPAR AssemblerTemplate COLON OutputOperands? ( COLON InputOperands ( COLON Clobbers )?)? RPAR SEMI
+
+AssemblerTemplate
+   <- StringLiteral
+
+OutputOperands
+   <- StringLiteral? WhiteSpace? Expression (COMMA StringLiteral? Expression)*
+
+InputOperands
+   <- StringLiteral? Expression (COMMA StringLiteral? Expression)*
+
+Clobbers
+   <- StringLiteral? Expression (COMMA StringLiteral? Expression)*
 
 #-------------------------------------------------------------------------
 #  A.2.1  Expressions
@@ -389,6 +404,8 @@ AssignmentOperator
     / OREQU
 
 Expression <- AssignmentExpression (COMMA AssignmentExpression)*
+    / LPAR Expression RPAR
+
 
 ConstantExpression <- ConditionalExpression
 
@@ -419,6 +436,7 @@ Pragma      <- '#'  (!'\n' .)*       # Treat pragma as comment
 #  A.1.2  Keywords
 #-------------------------------------------------------------------------
 
+ASM       <- 'asm'       !IdChar Spacing
 AUTO      <- 'auto'      !IdChar Spacing
 BREAK     <- 'break'     !IdChar Spacing
 CASE      <- 'case'      !IdChar Spacing
